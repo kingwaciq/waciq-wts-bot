@@ -1,6 +1,13 @@
 {
-  "name": "wts-bot-otp",
+  "name": "device-info-vercel-app",
   "version": "1.0.0",
-  "scripts": { "dev": "vercel dev", "start": "vercel dev" },
-  "dependencies": { "twilio": "^4.0.0", "uuid": "^9.0.0" }
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": "22.x"
+  }
 } 
