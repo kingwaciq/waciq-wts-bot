@@ -12,33 +12,32 @@
 <h2>Enter OTP</h2>
 <input id="otp" placeholder="123456" />
 <button id="verifyBtn">Verify OTP</button>
+<input id="number" type="tel" placeholder="+93761234567" required pattern="^\+[1-9]\d{7,14}$" />
 
 <script>
-let sessionId = null;
+document.getElementById("requestBtn").addEventListener("click", async ()=>{
+  const number = document.getElementById("number").value.trim();
 
-document.getElementById('getOtpBtn').addEventListener('click', async ()=>{
-  const number = document.getElementById('number').value;
-  const res = await fetch('/api/requestCode', {
-    method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ number })
-  });
-  const data = await res.json();
-  alert(data.message || data.error);
-});
+  // ✅ validate
+  const regex = /^\+[1-9]\d{7,14}$/;
+  if (!regex.test(number)) {
+    alert("❌ Please enter a valid WhatsApp number (e.g. +93761234567)");
+    return;
+  }
 
-document.getElementById('verifyBtn').addEventListener('click', async ()=>{
-  const number = document.getElementById('number').value;
-  const otp = document.getElementById('otp').value;
-  const res = await fetch('/api/verifyCode', {
-    method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ number, otp })
+  const res = await fetch("/api/requestCode", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify({ number })
   });
+
   const data = await res.json();
-  if(data.success){
-    sessionId = data.sessionId;
-    alert('OTP verified! Session active. All WhatsApp messages from this number will go to the bot.');
+  if (data.error) {
+    alert("❌ Error: " + data.error);
   } else {
-    alert(data.error);
+    alert("✅ OTP sent to Telegram (and maybe WhatsApp if enabled). Your code: " + data.otp);
   }
 });
-</script>
+</script> 
 </body>
 </html> 
