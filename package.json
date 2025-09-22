@@ -1,22 +1,6 @@
 {
-  "name": "multi-app-notifications",
+  "name": "wts-bot-otp",
   "version": "1.0.0",
-  "description": "Multi-App Browser Notifications forwarded to Telegram, WhatsApp, and SMS via Vercel API",
-  "main": "index.js",
-  "scripts": {
-    "dev": "vercel dev",
-    "start": "vercel dev",
-    "build": "echo 'No build needed for static HTML + API routes'"
-  },
-  "keywords": [
-    "notifications",
-    "telegram",
-    "whatsapp",
-    "sms",
-    "vercel",
-    "browser"
-  ],
-  "author": "WACIQ",
-  "license": "MIT",
-  "dependencies": {}
+  "scripts": { "dev": "vercel dev", "start": "vercel dev" },
+  "dependencies": { "twilio": "^4.0.0", "uuid": "^9.0.0" }
 } 
